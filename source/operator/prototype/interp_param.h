@@ -27,6 +27,7 @@
 
 struct interp_param
 {
+    int coordinate_transformation_mode; // align with onnx https://github.com/onnx/onnx/blob/master/docs/Operators.md#Resize
     int resize_type; // 1:nearest  2:bilinear or linear
     int output_height;
     int output_width;

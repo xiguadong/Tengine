@@ -1110,6 +1110,7 @@ tm_uoffset_t SaveTmInterpOp(void* const start_ptr, tm_uoffset_t* cur_pos, ir_nod
     tm_param.output_height = p->output_height;
     tm_param.output_width = p->output_width;
     tm_param.resize_type = p->resize_type;
+    tm_param.coordinate_transformation_mode = p->coordinate_transformation_mode;
     tm_param.width_scale = p->width_scale;
 
     TM2_Operator tm_op;
