@@ -894,8 +894,8 @@ typedef struct
 
 typedef struct
 {
-    int32_t coordinate_transformation_mode;//0=half_pixel  2=align_conner  3=asymmetric
-    int32_t resize_type; // 1=nearest  2=bilinear  3=bicubic
+    int32_t coordinate_transformation_mode; //0=half_pixel  2=align_conner  3=asymmetric
+    int32_t resize_type;                    // 1=nearest  2=bilinear  3=bicubic
     int32_t output_width;
     int32_t output_height;
     float width_scale;

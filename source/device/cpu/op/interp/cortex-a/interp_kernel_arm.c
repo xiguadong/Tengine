@@ -36,38 +36,34 @@ static void linear_coeffs(int w, int outw, int* xofs, float* alpha, int coordina
 {
     double scale = (double)w / outw;
     // half
-    if(0 == coordinate_transformation_mode)
+    if (0 == coordinate_transformation_mode)
     {
         scale = (double)(w - 0.5) / (outw - 0.5);
     }
     // align
-    if(1 == coordinate_transformation_mode)
+    if (1 == coordinate_transformation_mode)
     {
         scale = (double)(w - 1) / (outw - 1);
     }
     // asymmetric
-    if(2 == coordinate_transformation_mode)
+    if (2 == coordinate_transformation_mode)
     {
         scale = (double)w / outw;
     }
 
-
     for (int dx = 0; dx < outw; dx++)
     {
-        float fx = 0 ; 
+        float fx = 0;
         // half
-        if(0 == coordinate_transformation_mode)
+        if (0 == coordinate_transformation_mode)
         {
-            fx =  (float)((dx + 0.5) * scale - 0.5);
+            fx = (float)((dx + 0.5) * scale - 0.5);
         }
         // align and asymmetric
-        if((1 == coordinate_transformation_mode)||(2 == coordinate_transformation_mode))
+        if ((1 == coordinate_transformation_mode) || (2 == coordinate_transformation_mode))
         {
-
             fx = (float)(dx * scale);
-
         }
-
 
         int sx = floor(fx);
         fx -= sx;
@@ -540,7 +536,7 @@ int interp_run(struct tensor* output_tensor, struct tensor* input_tensor, struct
 
         // int align_corner = interp_param->resize_type == 2 ? 0 : 1;
         linear_coeffs(in_w, out_w, xofs, alpha, param->coordinate_transformation_mode);
-        linear_coeffs(in_h, out_h, yofs, beta,  param->coordinate_transformation_mode);
+        linear_coeffs(in_h, out_h, yofs, beta, param->coordinate_transformation_mode);
 
 #pragma omp parallel for num_threads(num_thread)
         for (int q = 0; q < in_c; ++q)

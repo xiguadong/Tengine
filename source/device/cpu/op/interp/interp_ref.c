@@ -43,36 +43,33 @@ static void linear_coeffs(int w, int outw, int* xofs, float* alpha, int coordina
 {
     double scale = (double)w / outw;
     // half
-    if(0 == coordinate_transformation_mode)
+    if (0 == coordinate_transformation_mode)
     {
         scale = (double)(w - 0.5) / (outw - 0.5);
     }
     // align
-    if(1 == coordinate_transformation_mode)
+    if (1 == coordinate_transformation_mode)
     {
         scale = (double)(w - 1) / (outw - 1);
     }
     // asymmetric
-    if(2 == coordinate_transformation_mode)
+    if (2 == coordinate_transformation_mode)
     {
         scale = (double)w / outw;
     }
 
-
     for (int dx = 0; dx < outw; dx++)
     {
-        float fx = 0 ; 
+        float fx = 0;
         // half
-        if(0 == coordinate_transformation_mode)
+        if (0 == coordinate_transformation_mode)
         {
-            fx =  (float)((dx + 0.5) * scale - 0.5);
+            fx = (float)((dx + 0.5) * scale - 0.5);
         }
         // align and asymmetric
-        if((1 == coordinate_transformation_mode)||(2 == coordinate_transformation_mode))
+        if ((1 == coordinate_transformation_mode) || (2 == coordinate_transformation_mode))
         {
-
             fx = (float)(dx * scale);
-
         }
         // need support pytorch_half_pixel mode
 
@@ -252,9 +249,8 @@ int ref_interp_fp32(struct tensor* input_tensor, struct tensor* output_tensor, s
         float* alpha = (float*)(buf + param->output_width + param->output_height);                          //new float[ow * 2];
         float* beta = (float*)(buf + param->output_width + param->output_height + param->output_width * 2); //new float[oh * 2];
 
-
         linear_coeffs(in_w, out_w, xofs, alpha, param->coordinate_transformation_mode);
-        linear_coeffs(in_h, out_h, yofs, beta,  param->coordinate_transformation_mode);
+        linear_coeffs(in_h, out_h, yofs, beta, param->coordinate_transformation_mode);
 
         for (int q = 0; q < channel; ++q)
         {
@@ -348,7 +344,7 @@ int ref_interp_int8(struct tensor* input_tensor, struct tensor* output_tensor, s
         float* beta = (float*)(buf + param->output_width + param->output_height + param->output_width * 2); //new float[oh * 2];
 
         linear_coeffs(in_w, out_w, xofs, alpha, param->coordinate_transformation_mode);
-        linear_coeffs(in_h, out_h, yofs, beta,  param->coordinate_transformation_mode);
+        linear_coeffs(in_h, out_h, yofs, beta, param->coordinate_transformation_mode);
 
         for (int q = 0; q < channel; ++q)
         {

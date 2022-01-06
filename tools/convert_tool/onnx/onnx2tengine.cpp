@@ -318,13 +318,10 @@ int onnx_serializer::load_constant_tensor(ir_graph_t* graph, const onnx::GraphPr
 
         const std::string& op = node.op_type();
 
-        if ((op == "Reshape" || op == "Gather" ||
-            op == "Div" || op == "Resize" ||
-            op == "Upsample" || op == "Clip") &&
-            (node.input_size() > 1))
+        if ((op == "Reshape" || op == "Gather" || op == "Div" || op == "Resize" || op == "Upsample" || op == "Clip") && (node.input_size() > 1))
         {
             // iter over constant inputs and create ir_tensor for constant tensor
-            for(int inp_idx = 0; inp_idx < node.input_size(); ++inp_idx)
+            for (int inp_idx = 0; inp_idx < node.input_size(); ++inp_idx)
             {
                 if (node_tensor.count(node.input(inp_idx)) == 0)
                     continue;
@@ -377,7 +374,7 @@ int onnx_serializer::load_constant_tensor(ir_graph_t* graph, const onnx::GraphPr
                         }
                     }
                 }
-                else if(tensor_data_type == TENGINE_DT_FP32)
+                else if (tensor_data_type == TENGINE_DT_FP32)
                 {
                     // to support float type constant data loading
                     int tensor_size = ir_tensor->elem_num * sizeof(float_t);
@@ -2138,15 +2135,15 @@ static int load_resize(ir_graph_t* graph, ir_node_t* node, const onnx::NodeProto
     TASSERT(coordinate_transformation_mode == "asymmetric" || coordinate_transformation_mode == "half_pixel" || coordinate_transformation_mode == "align_corners");
     int align_corner = (coordinate_transformation_mode == "align_corners");
 
-    if(coordinate_transformation_mode=="half_pixel")
+    if (coordinate_transformation_mode == "half_pixel")
     {
         interp_param->coordinate_transformation_mode = 0;
     }
-    if(coordinate_transformation_mode=="align_corners")
+    if (coordinate_transformation_mode == "align_corners")
     {
         interp_param->coordinate_transformation_mode = 1;
     }
-    if(coordinate_transformation_mode=="asymmetric")
+    if (coordinate_transformation_mode == "asymmetric")
     {
         interp_param->coordinate_transformation_mode = 2;
     }

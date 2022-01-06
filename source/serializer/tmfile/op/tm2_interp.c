@@ -47,7 +47,6 @@ static int tm2_load_interp(struct graph* ir_graph, struct node* ir_node, const T
     const char* mem_base = tm2_priv->base;
     const TM2_InterpParam* tm_param = (TM2_InterpParam*)(mem_base + tm_op->offset_t_param);
 
-
     param->coordinate_transformation_mode = tm_param->coordinate_transformation_mode;
     param->resize_type = tm_param->resize_type;
     param->width_scale = tm_param->width_scale;
